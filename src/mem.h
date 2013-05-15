@@ -1,7 +1,7 @@
 #ifndef PLATFORM_MEM_H
 #define PLATFORM_MEM_H
 
-#include "platform_os_detect.h"
+#include "os_detect.h"
 
 #define MEM_PAGE_SIZE 4096
 

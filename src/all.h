@@ -1,14 +1,14 @@
 #ifndef PLATFORM_ALL_H
 #define PLATFORM_ALL_H
 
-#include "platform_os_detect.h"
-#include "platform_compiler.h"
+#include "os_detect.h"
+#include "compiler.h"
 
-#include "platform_thread.h"
-#include "platform_shm.h"
-#include "platform_mutex.h"
-#include "platform_dynlib.h"
-#include "platform_socket.h"
-#include "platform_time.h"
+#include "thread.h"
+#include "shm.h"
+#include "mutex.h"
+#include "dynlib.h"
+#include "socket.h"
+#include "time.h"
 
 #endif /* PLATFORM_ALL_H */

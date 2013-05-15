@@ -1,8 +1,8 @@
 #ifndef PLATFORM_THREAD_H
 #define PLATFORM_THREAD_H
 
-#include "platform_os_detect.h"
-#include "platform_mutex.h"
+#include "os_detect.h"
+#include "mutex.h"
 
 #include <assert.h>
 

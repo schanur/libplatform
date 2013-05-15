@@ -1,7 +1,7 @@
 #ifndef PLATFORM_SHM_H
 #define PLATFORM_SHM_H
 
-#include "platform_os_detect.h"
+#include "os_detect.h"
 
 #ifdef PLATFORM_LINUX
 

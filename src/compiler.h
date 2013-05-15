@@ -1,7 +1,7 @@
 #ifndef PLATFORM_COMPILER_H
 #define PLATFORM_COMPILER_H
 
-#include "platform_os_detect.h"
+#include "os_detect.h"
 
 #ifdef PLATFORM_LINUX
 #define COMPILER_ALIGN(alignment,var) var  __attribute__ ((aligned (alignment)))
