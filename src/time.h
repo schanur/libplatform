@@ -1,5 +1,5 @@
 #ifndef PLATFORM_TIME_H
-#define PLATFORM_TIME_H
+#define PLATFORM_TIME_H 1
 
 #include "os_detect.h"
 

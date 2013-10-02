@@ -13,13 +13,13 @@
 
 typedef int shm_t;
 
-#define PAD(QWE, WER) QWE WER
+//#define PAD(QWE, WER) QWE WER
 //#define PADAA(QWE) otv_t QWE
 
 //; char pad[sizeof(void*) - 1]
 
-#define SHM_OPEN(name, flags)  shm_open(name, flags, 1)
-#define SHM_CLOSE(name)
+#define SHM_OPEN(shared_memory, flags)  shm_open(shared_memory, flags, 1)
+#define SHM_CLOSE(shared_memory)
 
 /*#define SHM_CREATE
 #define SHM_ATTACH

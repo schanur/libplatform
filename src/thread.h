@@ -16,19 +16,13 @@ struct thread_wait_t {
 	mutex_t                   mutex_wake;
 };
 
-#define THREAD_CREATE(err, hdl, func, args) (err = pthread_create(&hdl, NULL, func, (void*) args))
-#define THREAD_KILL(err, hdl)
-#define THREAD_END(err, hdl)
+/* Makros to spawn and end threads. */
+#define THREAD_CREATE(err,hdl,func,args) (err = pthread_create(&hdl, NULL, func, (void*) args))
+#define THREAD_KILL(err,hdl)             
+#define THREAD_END(err,hdl)
+#define THREAD_JOIN(err,hdl,ret)         (err = pthread_join  (&hdl, &ret))
 //#define THREAD_SIGNAL()
 
-#define THREAD_COND_CREATE(cond)                 (pthread_cond_init(cond, NULL))
-#define THREAD_COND_SIGNAL(cond)                 (pthread_cond_signal(cond))
-#define THREAD_COND_BROADCAST(cond)              (pthread_cond_broadcast(cond)))
-#define THREAD_COND_WAIT(wait_var)               (pthread_cond_wait(wait_var->cond_wake, wait_var->mutex_wake))
-#define THREAD_COND_TIMEDWAIT(cond,mutex,time)   (pthread_cond_timedwait(cond, mutex, time))
-#define THREAD_COND_DESTROY(cond)                (pthread_cond_destroy(cond))
-
-/*
 #define THREAD_COND_SAFE_WAIT(wait_var, compare, call) \
 	(do {											   \
 	    MUTEX_LOCK(&(wait_var->mutex_wake));		   \
