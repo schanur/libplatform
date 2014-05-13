@@ -23,16 +23,16 @@ struct thread_wait_t {
 #define THREAD_JOIN(err,hdl,ret)         (err = pthread_join  (&hdl, &ret))
 //#define THREAD_SIGNAL()
 
-#define THREAD_COND_SAFE_WAIT(wait_var, compare, call) \
-	(do {											   \
-	    MUTEX_LOCK(&(wait_var->mutex_wake));		   \
-	    while (compare) {                              \
-	        THREAD_COND_WAIT(wait_var);	   			   \
-	    }                                              \
-	    call;                                          \
-        MUTEX_UNLOCK(&(wait_var->mutex_wake))          \
-	} while (0);)
-*/
+#define THREAD_COND_SAFE_WAIT(wait_var, compare, call)                  \
+    do {                                                                \
+        MUTEX_LOCK(&(wait_var->mutex_wake));                            \
+        while (compare) {                                               \
+            THREAD_COND_WAIT(wait_var);                                 \
+        }                                                               \
+        call;                                                           \
+        MUTEX_UNLOCK(&(wait_var->mutex_wake));                          \
+    } while (0);
+
 #define THREAD_CALL /* No special calling convention required on posix OS.*/
 #else
 
