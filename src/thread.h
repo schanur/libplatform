@@ -12,8 +12,8 @@ typedef pthread_t      thread_handle_t;
 typedef pthread_cond_t thread_cond_t;
 
 struct thread_wait_t {
-	thread_cond_t             cond_wake;
-	mutex_t                   mutex_wake;
+    thread_cond_t             cond_wake;
+    mutex_t                   mutex_wake;
 };
 
 /* Makros to spawn and end threads. */
@@ -24,14 +24,14 @@ struct thread_wait_t {
 //#define THREAD_SIGNAL()
 
 #define THREAD_COND_SAFE_WAIT(wait_var, compare, call) \
-	(do {											   \
-	    MUTEX_LOCK(&(wait_var->mutex_wake));		   \
-	    while (compare) {                              \
-	        THREAD_COND_WAIT(wait_var);	   			   \
-	    }                                              \
-	    call;                                          \
-        MUTEX_UNLOCK(&(wait_var->mutex_wake))          \
-	} while (0);)
+    (do {                                                          \
+        MUTEX_LOCK(&(wait_var->mutex_wake));                       \
+        while (compare) {                                               \
+            THREAD_COND_WAIT(wait_var);                                 \
+        }                                                               \
+        call;                                                           \
+        MUTEX_UNLOCK(&(wait_var->mutex_wake))                           \
+            } while (0);)
 */
 #define THREAD_CALL /* No special calling convention required on posix OS.*/
 #else
