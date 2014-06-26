@@ -12,8 +12,8 @@ typedef pthread_t      thread_handle_t;
 typedef pthread_cond_t thread_cond_t;
 
 struct thread_wait_t {
-	thread_cond_t             cond_wake;
-	mutex_t                   mutex_wake;
+    thread_cond_t             cond_wake;
+    mutex_t                   mutex_wake;
 };
 
 /* Makros to spawn and end threads. */
