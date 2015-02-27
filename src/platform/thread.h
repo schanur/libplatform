@@ -3,16 +3,18 @@
 
 #include "os_detect.h"
 #include "mutex.h"
+#include "condition.h"
 
 #include <assert.h>
 
 #ifdef PLATFORM_LINUX
 #include <pthread.h>
 typedef pthread_t      thread_handle_t;
-typedef pthread_cond_t thread_cond_t;
+/* typedef pthread_cond_t thread_cond_t; */
 
 struct thread_wait_t {
-    thread_cond_t             cond_wake;
+    condition_t               cond_wake;
+    /* thread_cond_t             cond_wake; */
     mutex_t                   mutex_wake;
 };
 
@@ -42,12 +44,12 @@ typedef uint32_t thread_ret_t;
 #define THREAD_CREATE(ERR, HDL, FUNC, ARGS) (err = ((unsigned long) (HDL = (thread_handle_t) _beginthreadex(NULL, 0, &FUNC, (void*) ARGS, 0, NULL))) == 1L)
 #define THREAD_END _endthreadex()
 
-#define THREAD_COND_INIT(cond)                 (pthread_cond_init(cond, NULL))
-#define THREAD_COND_SIGNAL(cond)               (pthread_cond_signal(cond))
-#define THREAD_COND_BROADCAST(cond)            (pthread_cond_broadcast(cond)))
-#define THREAD_COND_WAIT(cond,mutex)           (pthread_cond_wait(cond, mutex))
-#define THREAD_COND_TIMEDWAIT(cond,mutex,time) (pthread_cond_timedwait(cond, mutex, time))
-#define THREAD_COND_DESTROY(cond)              (pthread_cond_destroy(cond))
+/* #define THREAD_COND_INIT(cond)                 (pthread_cond_init(cond, NULL)) */
+/* #define THREAD_COND_SIGNAL(cond)               (pthread_cond_signal(cond)) */
+/* #define THREAD_COND_BROADCAST(cond)            (pthread_cond_broadcast(cond))) */
+/* #define THREAD_COND_WAIT(cond,mutex)           (pthread_cond_wait(cond, mutex)) */
+/* #define THREAD_COND_TIMEDWAIT(cond,mutex,time) (pthread_cond_timedwait(cond, mutex, time)) */
+/* #define THREAD_COND_DESTROY(cond)              (pthread_cond_destroy(cond)) */
 
 
 #define THREAD_CALL __stdcall /* For managed code (.NET) use __clrcall instead. */
