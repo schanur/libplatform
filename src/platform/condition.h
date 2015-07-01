@@ -7,11 +7,15 @@
 
 #define _XOPEN_SOURCE 700
 #define _POSIX_C_SOURCE 200809L
+
+
 #include "pthread.h"
 
 typedef pthread_cond_t condition_t;
 
 #define CONDITION_CREATE(condition)                     pthread_cond_init     (condition, NULL)
+//#define CONDITION_CREATE(condition,flags)               pthread_cond_init     (condition, NULL)
+
 #define CONDITION_SIGNAL(condition)                     pthread_cond_signal   (condition)
 #define CONDITION_BROADCAST(condition)                  pthread_cond_broadcast(condition)
 #define CONDITION_WAIT(condition,mutex)                 pthread_cond_wait     (condition, mutex)
