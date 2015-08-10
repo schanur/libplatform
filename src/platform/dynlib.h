@@ -13,7 +13,9 @@ typedef void* dyn_lib_t;
 
 #else
 #ifdef PLATFORM_WINDOWS
-#include "windows.h"
+/* #include <winsock32.h> */
+#include <winsock2.h>
+#include <windows.h>
 typedef HMODULE dyn_lib_t;
 #define LOAD_DYN_LIB LoadLibrary
 #define UNLOAD_DYN_LIB FreeLibrary
