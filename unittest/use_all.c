@@ -10,7 +10,7 @@
 #endif
 #if !(defined(PLATFORM_LINUX) || defined(PLATFORM_WINDOWS))
 #error No platfoem defiend.
-#endif 
+#endif
 
 void test_align()
 {
@@ -27,7 +27,7 @@ void test_align()
     COMPILER_ALIGN(2048, uint32_t aligned_2048);
     COMPILER_ALIGN(4096, uint32_t aligned_4096);
     COMPILER_ALIGN(8192, uint32_t aligned_8192);
-    
+
     aligned_2    = 2;
     aligned_4    = 4;
     aligned_8    = 8;
@@ -41,7 +41,7 @@ void test_align()
     aligned_2048 = 2048;
     aligned_4096 = 4096;
     aligned_8192 = 8192;
-    
+
     assert(!(aligned_2 & 1));
     printf("%u\n", aligned_2);
     assert(!(aligned_4 & 3));
@@ -74,7 +74,7 @@ thread_ret_t THREAD_CALL test_thread_func(void *data)
 {
              int err       = 0;
     unsigned int thread_id = (unsigned int) data;
-    
+
     printf("thread: end: ret: %d", err);
     return ((thread_ret_t) err);
 }
@@ -100,8 +100,8 @@ int test_socket()
 
 int main(void)
 {
-	test_align();
-	test_thread();
-	test_socket();
-	return (0);
+        test_align();
+        test_thread();
+        test_socket();
+        return (0);
 }

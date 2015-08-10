@@ -34,7 +34,7 @@
   #else
     #ifdef PLATFORM_WINDOWS
       #if PLATFORM_BYTE_ORDER != LITTLE_ENDIAN
-	#error Wrong byte order. Makros only work on little endian maschines atm.
+        #error Wrong byte order. Makros only work on little endian maschines atm.
       #endif
       #include <winsock2.h>
       #include <sys/param.h>
