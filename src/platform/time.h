@@ -10,15 +10,21 @@
 
 #else
 #ifdef PLATFORM_WINDOWS
+
+//#if 0
 #define SLEEP_SEC(seconds) Sleep(seconds * 1000);
 #define CLOCK_GETTIME(clk_id,time_ptr) 
-typedef long time_t;
+/* typedef long time_t; */
 
-struct timespec_t {
-    time_t tv_sec;
-    long   tv_nsec;
-};
-
+/* struct timespec_t { */
+/*     time_t tv_sec; */
+/*     long   tv_nsec; */
+/* }; */
+/* struct timespec_t { */
+/*     int64_t tv_sec; */
+/*     long    tv_nsec; */
+/* }; */
+//#endif
 
 
 #else

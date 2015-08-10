@@ -14,11 +14,15 @@ typedef pthread_mutex_t mutex_t;
 
 #else
 #ifdef PLATFORM_WINDOWS
+
+#include <windows.h>
+
 typedef HANDLE mutex_t;
-#define MUTEX_CREATE(mutex)  ((mutex = (CreateMutex(NULL, FALSE, NULL))) == NULL)
-#define MUTEX_DESTROY(mutex) (CloseHandle(mutex))
-#define MUTEX_LOCK(mutex)    (WaitForSingleObject(mutex, INFINITE) != WAIT_OBJECT_0))
-#define MUTEX_UNLOCK(mutex)  (ReleaseMutex(mutex))
+#define MUTEX_CREATE(mutex)  ((*mutex = (CreateMutex(NULL, FALSE, NULL))) == NULL)
+/* #define MUTEX_CREATE(mutex)  mutex = CreateMutex(NULL, FALSE, NULL) */
+#define MUTEX_DESTROY(mutex) (CloseHandle(*mutex))
+#define MUTEX_LOCK(mutex)    (WaitForSingleObject(*mutex, INFINITE) != WAIT_OBJECT_0)
+#define MUTEX_UNLOCK(mutex)  (ReleaseMutex(*mutex))
 
 #else
 #error No platform defined.
