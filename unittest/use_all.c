@@ -12,7 +12,12 @@
 #error No platfoem defiend.
 #endif
 
-void test_align()
+void test__byte_order()
+{
+    PLATFORM_BYTE_ORDER
+}
+
+void test__compiler__align()
 {
     COMPILER_ALIGN(2,    uint32_t aligned_2);
     COMPILER_ALIGN(4,    uint32_t aligned_4);
@@ -70,7 +75,7 @@ void test_align()
     printf("%u\n", aligned_8192);
 }
 
-thread_ret_t THREAD_CALL test_thread_func(void *data)
+thread_ret_t THREAD_CALL test__thread_func(void *data)
 {
              int err       = 0;
     unsigned int thread_id = (unsigned int) data;
@@ -79,29 +84,29 @@ thread_ret_t THREAD_CALL test_thread_func(void *data)
     return ((thread_ret_t) err);
 }
 
-int test_thread() {
+int test__thread() {
 
 }
 
-int test_socket_client()
+int test__socket_client()
 {
 
 }
 
-int test_socket_server()
+int test__socket_server()
 {
 
 }
 
-int test_socket()
+int test__socket()
 {
 
 }
 
 int main(void)
 {
-        test_align();
-        test_thread();
-        test_socket();
+        test__align();
+        test__thread();
+        test__socket();
         return (0);
 }

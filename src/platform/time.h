@@ -13,7 +13,7 @@
 
 //#if 0
 #define SLEEP_SEC(seconds) Sleep(seconds * 1000);
-#define CLOCK_GETTIME(clk_id,time_ptr) 
+#define CLOCK_GETTIME(clk_id,time_ptr)
 /* typedef long time_t; */
 
 /* struct timespec_t { */

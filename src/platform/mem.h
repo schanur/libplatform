@@ -13,7 +13,7 @@
 #define MEM_WRITE PROT_WRITE
 #define MEM_EXEC  PROT_EXEC
 
-#define MEM_ALLOC_ANON_PAGE(page_cnt,mode) (mmap(NULL, page_cnt * MEM_PAGE_SIZE, mode, MAP_ANONYMOUS, -1, 0)) 
+#define MEM_ALLOC_ANON_PAGE(page_cnt,mode) (mmap(NULL, page_cnt * MEM_PAGE_SIZE, mode, MAP_ANONYMOUS, -1, 0))
 #define MEM_FREE_ANON_PAGE(ptr) (munmap(ptr, page_cnt * MEM_PAGE_SIZE))
 
 
