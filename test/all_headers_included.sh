@@ -13,7 +13,7 @@ function file_included() {
 
     # grep -c $(basename ${HEADER_TO_SEARCH}) < ${HEADER_TO_GREP}
     # exit 1
-    OCCUR_CNT=$(grep -c $(basename ${HEADER_TO_SEARCH}) < ${HEADER_TO_GREP} || true)
+    OCCUR_CNT=$(grep -c "#include \"$(basename ${HEADER_TO_SEARCH})\"" < ${HEADER_TO_GREP} || true)
     case "${OCCUR_CNT}" in
         1)
             true
@@ -22,7 +22,7 @@ function file_included() {
             echo "${HEADER_TO_SEARCH} is not included in ${HEADER_TO_GREP}"
             ;;
         *)
-            echo "Parse error"
+            echo "Parse error for ${HEADER_TO_SEARCH}: ${OCCUR_CNT}"
             exit 1
             ;;
     esac
