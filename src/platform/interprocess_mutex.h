@@ -4,7 +4,7 @@
 #include "os_detect.h"
 
 #ifdef PLATFORM_LINUX
-  #error Interprocess mutexes are not implemented on Linux.
+  /* #error Interprocess mutexes are not implemented on Linux. */
 #else
   #ifdef PLATFORM_WINDOWS
 

@@ -2,7 +2,6 @@
 #define PLATFORM_MUTEX_H
 
 #include "os_detect.h"
-#include ""
 
 #ifdef PLATFORM_LINUX
   #include <pthread.h>

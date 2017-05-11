@@ -3,10 +3,11 @@
 
 #include "os_detect.h"
 
+
 #ifdef PLATFORM_LINUX
 
-#define _XOPEN_SOURCE 700
-#define _POSIX_C_SOURCE 200809L
+/* #define _XOPEN_SOURCE 700 */
+/* #define _POSIX_C_SOURCE 200809L */
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <fcntl.h>

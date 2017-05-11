@@ -31,7 +31,7 @@
 #ifndef RUNTIME_ASSERT
   #ifndef NDEBUG
     #ifdef RUNTIME_ASSERT__CRASH_ON_ASSERTION_FAIL
-      #include <cstdlib>
+      /* #include <cstdlib> */
       #define RUNTIME_ASSERT(expr) if (!(expr)) { RUNTIME_ASSERT__CRASH_COMMAND(expr); }
     #else
       #define RUNTIME_ASSERT(expr) assert(expr)
