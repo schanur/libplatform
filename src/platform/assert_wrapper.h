@@ -1,5 +1,5 @@
-#ifndef SHARED__ASSERT_WRAPPER_H
-#define SHARED__ASSERT_WRAPPER_H
+#ifndef PLATFORM_ASSERT_WRAPPER_H
+#define PLATFORM_ASSERT_WRAPPER_H
 
 /**
  * The purpose of this module is that it can be much simpler to
@@ -49,4 +49,4 @@
   #error RUNTIME_FAIL already defined
 #endif
 
-#endif /* SHARED__ASSERT_WRAPPER_H */
+#endif /* PLATFORM_ASSERT_WRAPPER_H */
