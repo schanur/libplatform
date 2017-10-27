@@ -26,7 +26,7 @@ struct thread_wait_t {
 #define THREAD_KILL(err,hdl)
 #define THREAD_END(err,hdl)
 #define THREAD_JOIN(err,hdl,ret)         (err = pthread_join  (hdl, &ret))
-//#define THREAD_SIGNAL()
+/*#define THREAD_SIGNAL()*/
 #define THREAD_RET(return_code)          return (COMPILER_REINTERPRET_CAST(void *, return_code))
 
 #define THREAD_COND_SAFE_WAIT(wait_var, compare, call)                  \
@@ -55,7 +55,7 @@ struct thread_wait_t {
 typedef HANDLE                 thread_handle_t;
 typedef DWORD                  thread_id_t;
 typedef uint32_t               thread_ret_t;
-//typedef LPTHREAD_START_ROUTINE THREAD_FUNC;
+/*typedef LPTHREAD_START_ROUTINE THREAD_FUNC;*/
 typedef DWORD /*WINAPI*/       thread_sig_start_t;
 
 #define THREAD_CREATE(ERR, HDL, FUNC, ARGS) (err = ((unsigned long) (HDL = (thread_handle_t) CreateThread(NULL, \

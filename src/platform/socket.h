@@ -5,11 +5,11 @@
 #include "compiler.h" /* COMPILER_CAST */
 
 #ifdef PLATFORM_LINUX
-//#include <stdio.h>
+/*#include <stdio.h>*/
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-//#include <linux/in.h>
+/*#include <linux/in.h>*/
 #include <arpa/inet.h>
 #include <stdlib.h>
 #include <string.h>

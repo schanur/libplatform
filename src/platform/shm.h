@@ -14,10 +14,10 @@
 
 typedef int shm_t;
 
-//#define PAD(QWE, WER) QWE WER
-//#define PADAA(QWE) otv_t QWE
+/*#define PAD(QWE, WER) QWE WER*/
+/*#define PADAA(QWE) otv_t QWE*/
 
-//; char pad[sizeof(void*) - 1]
+/*; char pad[sizeof(void*) - 1]*/
 
 #define SHM_OPEN(shared_memory, flags)  shm_open(shared_memory, flags, 1)
 #define SHM_CLOSE(shared_memory)
