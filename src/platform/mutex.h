@@ -3,10 +3,12 @@
 
 #include "os_detect.h"
 
+/* #define MUTEX_DEBUG */
+
 #ifdef PLATFORM_LINUX
   #include <pthread.h>
 
-  #ifndef NDEBUG
+  #ifdef MUTEX_DEBUG
     #define PLATFORM__MUTEX__BREAK_ON_DEADLOCK
     struct mutex_debug_t {
         pthread_mutex_t lock;
@@ -33,11 +35,12 @@
             "%s:%i:%s: Mutex deadlock. "                                \
             "Previous locked at line: %i in function %s\n",             \
             __FILE__, __LINE__, __func__,                               \
-            previous_lock_line, previous_lock_function);
+            previous_lock_line, previous_lock_function                  \
+        )
 
-    #define MUTEX_CREATE(mutex)                                         \
+#define MUTEX_CREATE(mutex)                                             \
     {                                                                   \
-        int mutex_i;\
+        int mutex_i;                                                    \
         pthread_mutexattr_t platform_mutex__deadlock_init_attr;         \
         (void) pthread_mutexattr_init(&platform_mutex__deadlock_init_attr); \
         if (pthread_mutexattr_settype(&platform_mutex__deadlock_init_attr, PTHREAD_MUTEX_ERRORCHECK_NP)) { \
@@ -50,6 +53,7 @@
         }                                                               \
         (mutex)->lock_position.line = -1;                               \
     }
+
 #define MUTEX_LOCK(mutex)                                               \
     if (!pthread_mutex_lock(&((mutex)->lock))) {                        \
         (mutex)->lock_position.line     = __LINE__;                     \
