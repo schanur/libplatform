@@ -1,6 +1,6 @@
 #include "../shared_c/test.h"
 
-#include "platform/assert_wrapper.h"
+#include "platform/assertion.h"
 
 
 static void test__assert_wrapper__()
