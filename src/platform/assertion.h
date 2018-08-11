@@ -1,6 +1,9 @@
 #ifndef PLATFORM_ASSERTION_H
 #define PLATFORM_ASSERTION_H
 
+/**********************************************************************/
+/*                        Run time assertions                         */
+/**********************************************************************/
 /**
  * The purpose of this module is that it can be much simpler to
  * retrieve a correct stacktrace if the application is just crashing
@@ -48,5 +51,23 @@
 #else
   #error FAIL_RT already defined
 #endif
+
+
+/**********************************************************************/
+/*                     Compile time assertions                        */
+/**********************************************************************/
+
+#ifdef __STDC_VERSION__
+  #if __STDC_VERSION__ >= 201112L
+    #define PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE
+  #endif /* #if __STDC_VERSION__ >= 201112L */
+#endif /* #ifdef __STDC_VERSION__ */
+
+#ifdef PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE
+    #define ASSERT_CT(expr) static_assert(expr, "Assertion failed at compile time.")
+#else /* #ifdef PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE */
+    #define ASSERT_CT(expr) switch(0) { case 0: case expr:; }
+#endif /* #ifdef PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE */
+
 
 #endif /* PLATFORM_ASSERTION_H */
