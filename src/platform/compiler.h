@@ -40,7 +40,7 @@
 #ifdef PLATFORM_LINUX
   #define COMPILER_ALIGN(alignment,var) var    __attribute__ ((aligned (alignment)))
 /*#define COMPILER_PUSH_PACK(bytes)*/
-  #define COMPILER_NORETURN(func)       func   __attribute__ ((noreturn))
+  #define COMPILER_NORETURN(func)       void func   __attribute__ ((noreturn))
 
   #define COMPILER_WEAK_SYMBOL(symbol)  symbol __attribute__ ((weak))
 
