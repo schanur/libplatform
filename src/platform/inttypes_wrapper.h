@@ -8,6 +8,7 @@
   #include <stdint.h>
   #include <inttypes.h>
   #include <limits.h>
+  #include <unistd.h> /* size_t */
 #else
   #ifdef PLATFORM_WINDOWS
     #if 1 == 1
@@ -16,6 +17,8 @@
        * "Additional include path" variable in visual studio.
        */
       #include "stdint.h"
+
+      #define SIZE_T size_t
 
       /* #ifdef UINT_MIN */
       /*   #error UINT_MIN already defined. */
