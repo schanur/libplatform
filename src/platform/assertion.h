@@ -4,21 +4,18 @@
 /**********************************************************************/
 /*                        Run time assertions                         */
 /**********************************************************************/
-/**
- * The purpose of this module is that it can be much simpler to
- * retrieve a correct stacktrace if the application is just crashing
- * instead of getting terminated by std default assert macro. If
- * ASSERT__CRASH_ON_ASSERTION_FAIL is defined. Crash the application
- * in case the test expression evaluates to false.
- */
 
 #include <stdlib.h> /* abort() */
 
 #include <assert.h>
 
 /**
- * If RUNTIME_ASSERT__CRASH_ON_ASSERTION_FAIL is defined, we crash the
- * application. It is replaces by the usual "assert" macro otherwise.
+ * If ASSERT__CRASH_ON_ASSERTION_FAIL is defined, crash the
+ * application in case the test expression evaluates to false.  The
+ * purpose of RUNTIME_ASSERT__CRASH_ON_ASSERTION_FAIL is that it can
+ * be much simpler to retrieve a correct stacktrace if the application
+ * is just crashing instead of getting terminated by std default
+ * assert macro.
  */
 /* #define ASSERT_RT__CRASH_ON_ASSERTION_FAIL */
 
@@ -52,17 +49,17 @@
   #endif/* #ifndef NDEBUG */
 #else
   #error RUNTIME_ASSERT already defined
-#endif
+#endif /* #ifndef ASSERT_RT */
 
 #ifndef FAIL_RT
   #define FAIL_RT FAIL_RT__CRASH_COMMAND
 #else
   #error FAIL_RT already defined
-#endif
+#endif /* #ifndef FAIL_RT */
 
 
 /**********************************************************************/
-/*                     Compile time assertions                        */
+/*                      Compile time assertions                       */
 /**********************************************************************/
 
 #ifdef __STDC_VERSION__
@@ -73,7 +70,7 @@
 
 #ifdef PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE
     #define ASSERT_CT(expr) static_assert(expr, "Assertion failed at compile time.")
-#else /* #ifdef PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE */
+#else
     #define ASSERT_CT(expr) switch(0) { case 0: case expr:; }
 #endif /* #ifdef PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE */
 
