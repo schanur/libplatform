@@ -345,7 +345,7 @@ function compile_and_run_test
     COMPILE_CMD="${COMPILER} -Werror --std=${LANG_STD} ${BUILD_MAP[${BUILD}]} ${COMPILER_WARNINGS} ${INCLUDE_PATH} ${MODULE_FILENAME} -o ${TEST_BINARY_FILENAME}"
 
     if [ ! -f "${TEST_BINARY_FILENAME}" ]; then
-        # echo ${COMPILE_CMD}
+        # echo "${COMPILE_CMD}"
         ${COMPILE_CMD}
     fi
 
@@ -411,7 +411,11 @@ for                     EXECUTION_TYPE  in $(execution_type_list); do
                         continue
                     fi
 
-                    compile_and_run_test "${EXECUTION_TYPE}" "${LANGUAGE}" "${COMPILER}" "${LANG_STD}" "${BUILD}" "${MODULE_FILENAME}"
+                    LANG_MODULE_FILENAME="${MODULE_FILENAME}"
+                    if [ "${LANGUAGE}" = "cpp" ]; then
+                        LANG_MODULE_FILENAME="${MODULE_FILENAME}pp"
+                    fi
+                    compile_and_run_test "${EXECUTION_TYPE}" "${LANGUAGE}" "${COMPILER}" "${LANG_STD}" "${BUILD}" "${LANG_MODULE_FILENAME}"
 
                     done
                 done
