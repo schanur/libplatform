@@ -12,7 +12,7 @@
   #include <time.h>   /* nanosleep() */
 
 
-  #ifdef _SOURCE_POSIX
+  #if _POSIX_C_SOURCE >= 199309L
 
     /* Currently only supported on Unix like systems. The currently
      * highest supported time resolution on Windows implemented in this
