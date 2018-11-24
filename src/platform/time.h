@@ -4,6 +4,7 @@
 #include "os_detect.h"
 
 #include "assertion.h"
+#include "lang.h"
 
 #ifdef PLATFORM_LINUX
   #include <unistd.h> /* sleep() */
@@ -17,7 +18,7 @@
      * highest supported time resolution on Windows implemented in this
      * library is milliseconds.
      */
-    #define PL_PRIVATE_SLEEP_NSEC_CHECK(err,remaining,time,factor)        \
+    #define PLTF_PRIVATE_SLEEP_NSEC_CHECK(err,remaining,time,factor)      \
       do {                                                                \
           long            nanoseconds;                                    \
           struct timespec req, rem;                                       \
@@ -29,7 +30,7 @@
           remaining   = (rem.tv_sec * 1000000000 + rem.tv_nsec) / factor; \
       } while (0);
 
-    #define PL_PRIVATE_SLEEP_NSEC(nanoseconds)                            \
+    #define PLTF_PRIVATE_SLEEP_NSEC(nanoseconds)                          \
       do {                                                                \
           struct timespec req, rem;                                       \
           ASSERT_RT(nanoseconds >= 0);                                    \
@@ -38,28 +39,28 @@
           (void) nanosleep(&req , &rem);                                  \
       } while (0);
 
-    #define SLEEP_NSEC_CHECK(err,remaining,nanoseconds) PL_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, nanoseconds, 1)
-    #define SLEEP_NSEC(nanoseconds) PL_PRIVATE_SLEEP_NSEC(nanoseconds)
+    #define SLEEP_NSEC_CHECK(err,remaining,nanoseconds) PLTF_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, nanoseconds, 1)
+    #define SLEEP_NSEC(nanoseconds) PLTF_PRIVATE_SLEEP_NSEC(nanoseconds)
 
     /* Usleep is deprecated in newer Posix versions. We use nanosleep
      * instead. TODO: We can use usleep on older systems.
      */
     /* #define SLEEP_MSEC(milliseconds)       usleep(1000 * milliseconds) */
 
-    #define SLEEP_USEC_CHECK(err,remaining,microseconds) PL_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, microseconds, 1000)
+    #define SLEEP_USEC_CHECK(err,remaining,microseconds) PLTF_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, microseconds, 1000)
     #define SLEEP_USEC(microseconds)                                      \
       do {                                                                \
-          ASSERT_RT(microseconds < )
+          /*ASSERT_RT(microseconds < ) // TODO: Check for no overflow during multiplication */ \
           SLEEP_NSEC(microseconds * 1000)                                 \
 }     while (0);
 
-    #define SLEEP_MSEC_CHECK(err,remaining,milliseconds) PL_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, milliseconds, 1000000)
+    #define SLEEP_MSEC_CHECK(err,remaining,milliseconds) PLTF_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, milliseconds, 1000000)
     #define SLEEP_MSEC(milliseconds) SLEEP_NSEC(milliseconds * 1000000)
 
   #endif /*_SOURCE_POSIX */
 
 
-  #define SLEEP_SEC(seconds)             ASSERT_RT((int) seconds >= 0); sleep(seconds);
+#define SLEEP_SEC(seconds)             ASSERT_RT(PLTF_LANG_TYPE_CAST(int, seconds) >= 0); sleep(seconds);
 
   #define CLOCK_GETTIME(clk_id,time_ptr) clock_gettime(clk_id, time_ptr)
 
