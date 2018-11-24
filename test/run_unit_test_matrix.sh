@@ -35,9 +35,9 @@ STD_SUPPORT_MAP['gcc-9']="         c11 gnu11 c99 gnu99 c90 gnu90 c89 gnu89" # Sp
 STD_SUPPORT_MAP['gcc-10']="        c11 gnu11 c99 gnu99 c90 gnu90 c89 gnu89" # Speculative
 STD_SUPPORT_MAP['gcc-latest']="    c11 gnu11 c99 gnu99 c90 gnu90 c89 gnu89"
 
-STD_SUPPORT_MAP['clang++-3.8']="   c++2a gnu++2a c++17 gnu++17 c++14 gnu++14 c++11 gnu++11 c++98 gnu++98"
-STD_SUPPORT_MAP['clang++-3.9']="   c++2a gnu++2a c++17 gnu++17 c++14 gnu++14 c++11 gnu++11 c++98 gnu++98"
-STD_SUPPORT_MAP['clang++-4.0']="   c++2a gnu++2a c++17 gnu++17 c++14 gnu++14 c++11 gnu++11 c++98 gnu++98"
+STD_SUPPORT_MAP['clang++-3.8']="                               c++14 gnu++14 c++11 gnu++11 c++98 gnu++98"
+STD_SUPPORT_MAP['clang++-3.9']="                               c++14 gnu++14 c++11 gnu++11 c++98 gnu++98"
+STD_SUPPORT_MAP['clang++-4.0']="                               c++14 gnu++14 c++11 gnu++11 c++98 gnu++98"
 STD_SUPPORT_MAP['clang++-5.0']="   c++2a gnu++2a c++17 gnu++17 c++14 gnu++14 c++11 gnu++11 c++98 gnu++98"
 STD_SUPPORT_MAP['clang++-6.0']="   c++2a gnu++2a c++17 gnu++17 c++14 gnu++14 c++11 gnu++11 c++98 gnu++98"
 STD_SUPPORT_MAP['clang++-7.0']="   c++2a gnu++2a c++17 gnu++17 c++14 gnu++14 c++11 gnu++11 c++98 gnu++98"
