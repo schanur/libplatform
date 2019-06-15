@@ -11,52 +11,53 @@
 
   #include <time.h>   /* nanosleep() */
 
+  #ifdef _POSIX_C_SOURCE
+    #if _POSIX_C_SOURCE >= 199309L
 
-  #if _POSIX_C_SOURCE >= 199309L
+      /* Currently only supported on Unix like systems. The currently
+       * highest supported time resolution on Windows implemented in this
+       * library is milliseconds.
+       */
+      #define PLTF_PRIVATE_SLEEP_NSEC_CHECK(err,remaining,time,factor)      \
+        do {                                                                \
+            long            nanoseconds;                                    \
+            struct timespec req, rem;                                       \
+            ASSERT_RT(time >= 0);                                           \
+            nanoseconds = time * factor;                                    \
+            req.tv_sec  = ((time_t) nanoseconds) / 1000000000;              \
+            req.tv_nsec = ((long)   nanoseconds) % 1000000000;              \
+            err         = nanosleep(&req , &rem);                           \
+            remaining   = (rem.tv_sec * 1000000000 + rem.tv_nsec) / factor; \
+        } while (0);
 
-    /* Currently only supported on Unix like systems. The currently
-     * highest supported time resolution on Windows implemented in this
-     * library is milliseconds.
-     */
-    #define PLTF_PRIVATE_SLEEP_NSEC_CHECK(err,remaining,time,factor)      \
-      do {                                                                \
-          long            nanoseconds;                                    \
-          struct timespec req, rem;                                       \
-          ASSERT_RT(time >= 0);                                           \
-          nanoseconds = time * factor;                                    \
-          req.tv_sec  = ((time_t) nanoseconds) / 1000000000;              \
-          req.tv_nsec = ((long)   nanoseconds) % 1000000000;              \
-          err         = nanosleep(&req , &rem);                           \
-          remaining   = (rem.tv_sec * 1000000000 + rem.tv_nsec) / factor; \
-      } while (0);
+      #define PLTF_PRIVATE_SLEEP_NSEC(nanoseconds)                          \
+        do {                                                                \
+            struct timespec req, rem;                                       \
+            ASSERT_RT(nanoseconds >= 0);                                    \
+            req.tv_sec  = ((time_t) nanoseconds) / 1000000000;              \
+            req.tv_nsec = ((long)   nanoseconds) % 1000000000;              \
+            (void) nanosleep(&req , &rem);                                  \
+        } while (0);
 
-    #define PLTF_PRIVATE_SLEEP_NSEC(nanoseconds)                          \
-      do {                                                                \
-          struct timespec req, rem;                                       \
-          ASSERT_RT(nanoseconds >= 0);                                    \
-          req.tv_sec  = ((time_t) nanoseconds) / 1000000000;              \
-          req.tv_nsec = ((long)   nanoseconds) % 1000000000;              \
-          (void) nanosleep(&req , &rem);                                  \
-      } while (0);
+      #define SLEEP_NSEC_CHECK(err,remaining,nanoseconds) PLTF_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, nanoseconds, 1)
+      #define SLEEP_NSEC(nanoseconds) PLTF_PRIVATE_SLEEP_NSEC(nanoseconds)
 
-    #define SLEEP_NSEC_CHECK(err,remaining,nanoseconds) PLTF_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, nanoseconds, 1)
-    #define SLEEP_NSEC(nanoseconds) PLTF_PRIVATE_SLEEP_NSEC(nanoseconds)
+      /* Usleep is deprecated in newer Posix versions. We use nanosleep
+       * instead. TODO: We can use usleep on older systems.
+       */
+      /* #define SLEEP_MSEC(milliseconds)       usleep(1000 * milliseconds) */
 
-    /* Usleep is deprecated in newer Posix versions. We use nanosleep
-     * instead. TODO: We can use usleep on older systems.
-     */
-    /* #define SLEEP_MSEC(milliseconds)       usleep(1000 * milliseconds) */
+      #define SLEEP_USEC_CHECK(err,remaining,microseconds) PLTF_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, microseconds, 1000)
+      #define SLEEP_USEC(microseconds)                                      \
+        do {                                                                \
+            /*ASSERT_RT(microseconds < ) // TODO: Check for no overflow during multiplication */ \
+            SLEEP_NSEC(microseconds * 1000)                                 \
+        } while (0);
 
-    #define SLEEP_USEC_CHECK(err,remaining,microseconds) PLTF_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, microseconds, 1000)
-    #define SLEEP_USEC(microseconds)                                      \
-      do {                                                                \
-          /*ASSERT_RT(microseconds < ) // TODO: Check for no overflow during multiplication */ \
-          SLEEP_NSEC(microseconds * 1000)                                 \
-}     while (0);
+      #define SLEEP_MSEC_CHECK(err,remaining,milliseconds) PLTF_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, milliseconds, 1000000)
+      #define SLEEP_MSEC(milliseconds) SLEEP_NSEC(milliseconds * 1000000)
 
-    #define SLEEP_MSEC_CHECK(err,remaining,milliseconds) PLTF_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, milliseconds, 1000000)
-    #define SLEEP_MSEC(milliseconds) SLEEP_NSEC(milliseconds * 1000000)
-
+    #endif /*_SOURCE_POSIX >= $VERSION */
   #endif /*_SOURCE_POSIX */
 
 
