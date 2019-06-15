@@ -8,6 +8,7 @@
 #include "compliance.h"
 #include "condition.h"
 #include "dynlib.h"
+#include "filesystem.h"
 #include "interprocess_mutex.h"
 #include "inttypes_wrapper.h"
 #include "mem.h"
