@@ -1,10 +1,10 @@
 #!/bin/bash
 
 echo Check for lua interpreter.
-which lua5.2 > /dev/null || exit 1
+which lua > /dev/null || exit 1
 
 echo Check for python interpreter.
-which python3.2 > /dev/null || exit 1
+which python3 > /dev/null || exit 1
 
 echo Load shared library in lua.
 ./load_shared_lib.lua || exit 1
