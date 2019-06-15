@@ -36,6 +36,10 @@
 #define COMPILER_DISABLE_WARNING_DOUBLE_PROMOTION                           COMPILER_DISABLE_WARNING(double-promotion, double-promotion, 42)
 #define COMPILER_ENABLE_WARNING_DOUBLE_PROMOTION                            COMPILER_ENABLE_WARNING (double-promotion, double-promotion, 42)
 
+/* TODO: Find numeric value for MS compiler. */
+#define COMPILER_DISABLE_WARNING_CAST_QUALIFIER                             COMPILER_DISABLE_WARNING(cast-qual, cast-qual, -1)
+#define COMPILER_ENABLE_WARNING_CAST_QUALIFIER                              COMPILER_ENABLE_WARNING (cast-qual, cast-qual, -1)
+
 
 #ifdef PLATFORM_LINUX
   #define COMPILER_ALIGN(alignment,var) var             __attribute__ ((aligned (alignment)))
