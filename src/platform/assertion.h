@@ -66,6 +66,7 @@
   #if __STDC_VERSION__ >= 201112L
     #define PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE
   #endif /* #if __STDC_VERSION__ >= 201112L */
+
 #endif /* #ifdef __STDC_VERSION__ */
 
 #ifdef PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE

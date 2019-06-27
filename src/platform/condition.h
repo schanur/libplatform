@@ -4,6 +4,7 @@
 #include "os_detect.h"
 #include "mutex.h"
 
+
 #define CONDITION_ERR__NO_ERR      0
 #define CONDITION_ERR__INTERRUPTED 0 /* Interrupted by signal. */
 #define CONDITION_ERR__TIMEOUT     0
