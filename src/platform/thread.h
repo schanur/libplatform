@@ -37,7 +37,7 @@ struct thread_wait_t {
         }                                                               \
         call;                                                           \
         MUTEX_UNLOCK(&(wait_var->mutex_wake));                          \
-    } while (0);
+    } while (0)
 
 #define THREAD_CALL /* No special calling convention required on posix OS.*/
 
