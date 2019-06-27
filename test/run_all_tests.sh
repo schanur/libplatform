@@ -6,8 +6,8 @@ which lua > /dev/null || exit 1
 echo Check for python interpreter.
 which python3 > /dev/null || exit 1
 
-echo Load shared library in lua.
-./load_shared_lib.lua || exit 1
+# echo Load shared library in lua.
+# ./load_shared_lib.lua || exit 1
 
 # Valgrind always report the file descriptors stdin,
 # stdout and stderr as leaked ones. Maybe the compiler
