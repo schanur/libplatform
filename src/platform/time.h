@@ -71,9 +71,9 @@
   //#if 0
   #include <windows.h> /* Sleep() */
 
-  #define SLEEP_MSEC(milliseconds)       ASSERT_RT(seconds >= 0); Sleep(milliseconds);
+  #define SLEEP_MSEC(milliseconds)       ASSERT_RT(milliseconds >= 0); Sleep(milliseconds);
 
-  #define SLEEP_SEC(seconds)             ASSERT_RT(seconds >= 0); Sleep(seconds * 1000);
+  #define SLEEP_SEC(seconds)             ASSERT_RT(seconds      >= 0); Sleep(seconds * 1000);
 
   #define CLOCK_GETTIME(clk_id,time_ptr)
   /* typedef long time_t; */
