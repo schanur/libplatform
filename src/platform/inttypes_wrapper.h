@@ -9,6 +9,9 @@
   #include <inttypes.h>
   #include <limits.h>
   #include <unistd.h> /* size_t */
+
+  #define PRIsize_t "zu"
+
 #else
   #ifdef PLATFORM_WINDOWS
     #if 1 == 1
@@ -43,6 +46,13 @@
         /* #define INT_MIN  -2147483648 */
         /* #define INT_MAX   2147483647 */
       #endif
+
+      #ifdef _WIN64
+        #define PRIsize_t PRIu64
+      #else
+        #define PRIsize_t PRIu32
+      #endif
+
     #else
       /* Use default version. */
       #include <stdint.h>
