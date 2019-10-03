@@ -21,7 +21,7 @@ struct thread_wait_t {
     mutex_t                   mutex_wake;
 };
 
-/* Makros to spawn and end threads. */
+/* Macros to spawn and end threads. */
 #define THREAD_CREATE(err,hdl,func,args) (err = pthread_create(&hdl, NULL, func, COMPILER_REINTERPRET_CAST(void *, args)))
 #define THREAD_KILL(err,hdl)
 #define THREAD_END(err,hdl)
@@ -39,7 +39,7 @@ struct thread_wait_t {
         MUTEX_UNLOCK(&(wait_var->mutex_wake));                          \
     } while (0)
 
-#define THREAD_CALL /* No special calling convention required on posix OS.*/
+#define THREAD_CALL /* No special calling convention required on posix OS. */
 
 #define THREAD_ID(id)                    (id = pthread_self())
 #define THREAD_EQUAL(id_1,id_2)          (pthread_equal(id_1, id_2))
@@ -58,19 +58,29 @@ typedef uint32_t               thread_ret_t;
 /*typedef LPTHREAD_START_ROUTINE THREAD_FUNC;*/
 typedef DWORD /*WINAPI*/       thread_sig_start_t;
 
-#define THREAD_CREATE(ERR, HDL, FUNC, ARGS) (err = ((unsigned long) (HDL = (thread_handle_t) CreateThread(NULL, \
-                                                                                                          0, \
-                                                                                                          &FUNC, \
-                                                                                                          COMPILER_REINTERPRET_CAST(void *, ARGS), \
-                                                                                                          0, \
-                                                                                                          NULL))) == 1L)
+#define THREAD_CREATE(ERR, HDL, FUNC, ARGS) \
+    (err = (\
+        (unsigned long) (                                               \
+            HDL =                                                       \
+            (thread_handle_t) CreateThread(                             \
+                NULL,                                                   \
+                0,                                                      \
+                &FUNC,                                                  \
+                COMPILER_REINTERPRET_CAST(void *, ARGS),                \
+                0,                                                      \
+                NULL))) == 1L)
 
-/* #define THREAD_CREATE(ERR, HDL, FUNC, ARGS) (err = ((unsigned long) (HDL = (thread_handle_t) AfxBeginThread(NULL, \ */
-/*                                                                                                             0, \ */
-/*                                                                                                             &FUNC, \ */
-/*                                                                                                             COMPILER_CAST(void *, ARGS), \ */
-/*                                                                                                             0, \ */
-/*                                                                                                             NULL))) == 1L) */
+/* #define THREAD_CREATE(ERR, HDL, FUNC, ARGS) \ */
+/*     (err = (\ */
+/*         (unsigned long) (\ */
+/*             HDL = \ */
+/*             (thread_handle_t) AfxBeginThread(                           \ */
+/*                 NULL,                                                   \ */
+/*                 0,                                                      \ */
+/*                 &FUNC,                                                  \ */
+/*                 COMPILER_CAST(void *, ARGS),                            \ */
+/*                 0,                                                      \ */
+/*                 NULL))) == 1L) */
 
 //#define THREAD_CREATE(ERR, HDL, FUNC, ARGS) (err = ((unsigned long) (HDL = (thread_handle_t) _beginthreadex(NULL, 0, &FUNC, (void*) ARGS, 0, NULL))) == 1L)
 #define THREAD_END                          _endthreadex()
