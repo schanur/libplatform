@@ -7,7 +7,7 @@
 #define PLATFORM_PRIVATE_STR_INTERN(s)                                      #s
 #define PLATFORM_PRIVATE_STR(x,y)                                           PLATFORM_PRIVATE_STR_INTERN(x ## y)
 
-#ifdef PLATFORM_LINUX
+#if defined(PLATFORM_LINUX) || __MINGW32__
   #define PLATFORM_PRIVATE_DO_PRAGMA(x)                                     _Pragma (#x)
   #define PLATFORM_PRIVATE_PRAGMA(compiler,x)                               PLATFORM_PRIVATE_DO_PRAGMA(compiler diagnostic x)
 #else
@@ -52,17 +52,19 @@
 #else
   #ifdef PLATFORM_WINDOWS
     #define COMPILER_ALIGN(alignment, var) __declspec(align(alignment)) var
-    #define COMPILER_NORETURN(func_sig)   __declspec(noreturn)          func_sig
+    #define COMPILER_NORETURN(func_sig)    __declspec(noreturn)         func_sig
     #define COMPILER_WEAK_SYMBOL(symbol)   __declspec(selectany)        symbol
 
-    #ifndef _MSC_VER
-      #error _MSC_VER not defined
-    #endif
 
     #define __func__ __FUNCTION__
 
-    #if _MSC_VER <= 1500 /* Visual Studio 2008 or older. */
-      #define NO_C_STD_COMPLIANT_STDINT_HEADER
+    #ifndef __MINGW32__
+      #ifndef _MSC_VER
+        #error _MSC_VER not defined
+      #endif
+      #if _MSC_VER <= 1500 /* Visual Studio 2008 or older. */
+        #define NO_C_STD_COMPLIANT_STDINT_HEADER
+      #endif
     #endif
 
   #else

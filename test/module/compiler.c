@@ -66,6 +66,7 @@ static void test__compiler__align()
     mu_assert(!(aligned_8192 & 8191));
 }
 
+
 int main(void)
 {
     test__compiler__align();

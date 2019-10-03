@@ -13,6 +13,7 @@
 #include "floating_point.h"
 #include "interprocess_mutex.h"
 #include "inttypes_wrapper.h"
+#include "lang.h"
 #include "mem.h"
 #include "mutex.h"
 #include "os_detect.h"

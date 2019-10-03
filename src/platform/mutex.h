@@ -97,8 +97,7 @@
       #include <windows.h>
 
       typedef HANDLE mutex_t;
-      #define MUTEX_CREATE(mutex)  ((*mutex = (CreateMutex(NULL, FALSE, NULL))) == NULL)
-      /* #define MUTEX_CREATE(mutex)  mutex = CreateMutex(NULL, FALSE, NULL) */
+      #define MUTEX_CREATE(mutex)  ((void) (*mutex = (CreateMutex(NULL, FALSE, NULL))))
       #define MUTEX_DESTROY(mutex) (CloseHandle(*mutex))
       /* #define MUTEX_LOCK(mutex)    (WaitForSingleObject(*mutex, INFINITE) != WAIT_OBJECT_0) */
       #define MUTEX_LOCK(mutex)    (WaitForSingleObject(*mutex, INFINITE))

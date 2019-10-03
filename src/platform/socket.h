@@ -23,7 +23,7 @@ typedef int socket_t;
 
 #define SOCKET_STATIC_INITITALIZE            /* No need to initialize networking on Linux. */
 
-#define SOCKET_CREATE(af, type, prot)                                   \
+#define SOCKET_CREATE(af,type,prot)                                     \
     _Pragma("clang diagnostic push")                                    \
     _Pragma("clang diagnostic ignored \"-Wdisabled-macro-expansion\"")  \
     socket(af, type, prot)                                              \
@@ -47,7 +47,7 @@ typedef SOCKADDR_IN sockaddr_in_t;
 
 #define SOCKET_STATIC_INITITALIZE            WSASetup
 
-#define SOCKET_CREATE(af, type, prot)        socket(af, type, prot)
+#define SOCKET_CREATE(af,type,prot)          socket(af, type, prot)
 #define SOCKET_CREATE_SUCC(sock_fd)          ((sock_fd) != INVALID_SOCKET)
 #define SOCKET_CLOSE(sock_fd)                closesocket(sock_fd)
 #define SOCKET_ERRNO                         WSAGetLastError()

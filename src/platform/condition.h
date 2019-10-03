@@ -41,8 +41,10 @@
 
     #ifdef CONDITION_VARIABLE_INIT
       #define NOMINMAX
-      #include "WinBase.h"
-      #include "Windows.h"
+      /* #include "WinBase.h" */
+      #include "winbase.h"
+      /* #include "Windows.h" */
+      #include "windows.h"
 
       typedef CONDITION_VARIABLE condition_t;
       typedef BOOL               condition_err_t;

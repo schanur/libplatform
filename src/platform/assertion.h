@@ -20,11 +20,11 @@
 /* #define ASSERT_RT__CRASH_ON_ASSERTION_FAIL */
 
 /* Crash method by which the application is halted. */
-#define ASSERT_RT__CRASH_METHOD_DIV_BY_ZERO
-/* #define ASSERT_RT__CRASH_METHOD_ABORT */
+/* #define ASSERT_RT__CRASH_METHOD_DIV_BY_ZERO */
+#define ASSERT_RT__CRASH_METHOD_ABORT
 
 #ifdef ASSERT_RT__CRASH_METHOD_DIV_BY_ZERO
-  #define ASSERT_RT__CRASH_COMMAND(expr) (void) 1 / 0
+  #define ASSERT_RT__CRASH_COMMAND(expr) ((void) 1 / 0)
 #endif
 #ifdef ASSERT_RT__CRASH_METHOD_ABORT
   #define ASSERT_RT__CRASH_COMMAND(expr) abort(); assert(expr) /* assert is a backup just in case abort does not work as expected. */
@@ -33,7 +33,8 @@
 /* #define ASSERT_RT__CRASH_COMMAND(expr) fprintf(stderr, #expr); (void) (1 / 0); abort(); assert(expr) */
 /* #define ASSERT_RT__CRASH_COMMAND(expr) fprintf(stderr, #expr); abort(); assert(0) */
 
-#define FAIL_RT__CRASH_COMMAND abort(); assert(0)
+
+#define FAIL_RT__CRASH_COMMAND abort()
 
 
 #ifndef ASSERT_RT
@@ -45,7 +46,7 @@
       #define ASSERT_RT(expr) assert(expr)
     #endif /* #ifdef ASSERT_RT__CRASH_ON_ASSERTION_FAIL */
   #else
-    #define ASSERT_RT(expr) /* Assert macro ignored in release build. */
+    #define ASSERT_RT(expr)/* Assert macro ignored in release build. */
   #endif/* #ifndef NDEBUG */
 #else
   #error RUNTIME_ASSERT already defined
@@ -77,3 +78,10 @@
 
 
 #endif /* PLATFORM_ASSERTION_H */
+
+
+/* TODO: Remove */
+#ifndef ASSERT_RT
+   /* #error ASSERT_RT not defined */
+  #define ASSERT_RT(expr) 1==1/**/
+#endif
