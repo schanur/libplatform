@@ -9,10 +9,6 @@
 #ifndef _DEFAULT_SOURCE
   #define _DEFAULT_SOURCE
 #endif
-/* #define _BSD_SOURCE */
-/* #define _POSIX_C_SOURCE */
-/* #define _XOPEN_SOURCE 700 */
-/* #define _POSIX_C_SOURCE 200809L */
 
 #elif defined(PLATFORM_WINDOWS)
 
