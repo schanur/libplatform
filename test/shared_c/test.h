@@ -1,6 +1,8 @@
 #ifndef MU_TEST_FRAMEWORK
 #define MU_TEST_FRAMEWORK
 
+#include "platform/include_first.h"
+
 #include <stdio.h>
 
 #define mu_assert(condition)                                            \
