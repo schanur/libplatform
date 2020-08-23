@@ -19,7 +19,7 @@
       /* The location of the stdint.h file has to be added to
        * "Additional include path" variable in visual studio.
        */
-      #include "stdint.h"
+      #include "stdint.h" // cppcheck-suppress missingInclude
 
       #define SIZE_T size_t
 
