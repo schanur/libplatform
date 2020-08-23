@@ -67,9 +67,32 @@ static void test__compiler__align()
 }
 
 
+PLTF_COMPILER_PACKED(
+    struct test__compiler__packed__inner_struct {
+        char test1;
+        int  test2;
+    }
+    );
+
+PLTF_COMPILER_PACKED(
+    struct test__compiler__packed__outer_struct {
+        struct test__compiler__packed__inner_struct inner1;
+        struct test__compiler__packed__inner_struct inner2;
+        struct test__compiler__packed__inner_struct inner3;
+        struct test__compiler__packed__inner_struct inner4;
+    }
+    );
+
+static void test__compiler__packed()
+{
+    mu_assert(sizeof(struct test__compiler__packed__outer_struct) == 20);
+}
+
+
 int main(void)
 {
     test__compiler__align();
+    test__compiler__packed();
 
     return mu_test_status;
 }

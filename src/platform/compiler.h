@@ -42,11 +42,12 @@
 
 
 #ifdef PLATFORM_LINUX
-  #define COMPILER_ALIGN(alignment,var) var             __attribute__ ((aligned (alignment)))
+  #define COMPILER_ALIGN(alignment,var)    var             __attribute__ ((aligned (alignment)))
 /*#define COMPILER_PUSH_PACK(bytes)*/
-  #define COMPILER_NORETURN(func_sig)   void   func_sig __attribute__ ((noreturn))
+  #define COMPILER_NORETURN(func_sig)      void func_sig   __attribute__ ((noreturn))
 
-  #define COMPILER_WEAK_SYMBOL(symbol)  symbol          __attribute__ ((weak))
+  #define PLTF_COMPILER_PACKED(structure)  structure       __attribute__ ((packed))
+  #define COMPILER_WEAK_SYMBOL(symbol)     symbol          __attribute__ ((weak))
 
   #define COMPILER_PUSH_WARNING()
 #else
