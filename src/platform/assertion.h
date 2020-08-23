@@ -41,12 +41,12 @@
   #ifndef NDEBUG
     #ifdef ASSERT_RT__CRASH_ON_ASSERTION_FAIL
       /* #include <cstdlib> */
-      #define ASSERT_RT(expr) if (!(expr)) { ASSERT_RT__CRASH_COMMAND(expr); }
+      #define ASSERT_RT(expr) if (!(expr)) { ASSERT_RT__CRASH_COMMAND(expr); } // LCOV_EXCL_LINE LCOV_EXCL__BR_LINE
     #else
-      #define ASSERT_RT(expr) assert(expr)
+      #define ASSERT_RT(expr) assert(expr) // LCOV_EXCL_LINE LCOV_EXCL_BR_LINE
     #endif /* #ifdef ASSERT_RT__CRASH_ON_ASSERTION_FAIL */
   #else
-    #define ASSERT_RT(expr)/* Assert macro ignored in release build. */
+    #define ASSERT_RT(expr) /* Assert macro ignored in release build. */
   #endif/* #ifndef NDEBUG */
 #else
   #error RUNTIME_ASSERT already defined
