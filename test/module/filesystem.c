@@ -17,7 +17,7 @@ static void test__filesystem__PLTF_ABS_EXECUTABLE_FILENAME()
 {
     char filename[PLTF_PATH_MAX];
     int  pltf_err = -1;
-    strcpy(filename, "");
+    memset(filename, 0 , PLTF_PATH_MAX);
     PLTF_ABS_EXECUTABLE_FILENAME(pltf_err, filename, PLTF_PATH_MAX);
     mu_assert(!pltf_err);
     mu_assert(strlen(filename) > 0);
