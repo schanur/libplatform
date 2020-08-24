@@ -23,7 +23,8 @@
   # define COMPILER_ENABLE_WARNING(gcc_unused,clang_unused,msvc_errorcode)  PLATFORM_PRIVATE_PRAGMA(msvc,pop)
 #elif defined(__GNUC__)
   #if ((__GNUC__ * 100) + __GNUC_MINOR__) >= 406
-    # define COMPILER_DISABLE_WARNING(gcc_option,clang_unused,msvc_unused)  PLATFORM_PRIVATE_PRAGMA(GCC,push)   PLATFORM_PRIVATE_PRAGMA(GCC,ignored PLATFORM_PRIVATE_STR(-W,gcc_option))
+    # define COMPILER_DISABLE_WARNING(gcc_option,clang_unused,msvc_unused)  PLATFORM_PRIVATE_PRAGMA(GCC,push)   \
+                                                                            PLATFORM_PRIVATE_PRAGMA(GCC,ignored PLATFORM_PRIVATE_STR(-W,gcc_option))
     # define COMPILER_ENABLE_WARNING(gcc_option,clang_unused,msvc_unused)   PLATFORM_PRIVATE_PRAGMA(GCC,pop)
   #else
     # define COMPILER_DISABLE_WARNING(gcc_option,clang_unused,msvc_unused)  PLATFORM_PRIVATE_PRAGMA(GCC,ignored PLATFORM_PRIVATE_STR(-W,gcc_option))
@@ -39,6 +40,10 @@
 /* TODO: Find numeric value for MS compiler. */
 #define COMPILER_DISABLE_WARNING_CAST_QUALIFIER                             COMPILER_DISABLE_WARNING(cast-qual, cast-qual, -1)
 #define COMPILER_ENABLE_WARNING_CAST_QUALIFIER                              COMPILER_ENABLE_WARNING (cast-qual, cast-qual, -1)
+
+/* TODO: Find numeric value for MS compiler. */
+#define COMPILER_DISABLE_WARNING_UNUSED_LOCAL_TYPEDEF                       COMPILER_DISABLE_WARNING(unused-local-typedefs, unused-local-typedef, -1)
+#define COMPILER_ENABLE_WARNING_UNUSED_LOCAL_TYPEDEF                        COMPILER_ENABLE_WARNING (unused-local-typedefs, unused-local-typedef, -1)
 
 
 #ifdef PLATFORM_LINUX

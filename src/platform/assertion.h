@@ -1,6 +1,9 @@
 #ifndef PLATFORM_ASSERTION_H
 #define PLATFORM_ASSERTION_H
 
+#include "compiler.h"
+
+
 /**********************************************************************/
 /*                        Run time assertions                         */
 /**********************************************************************/
@@ -73,7 +76,23 @@
 #ifdef PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE
     #define ASSERT_CT(expr) static_assert(expr, "Assertion failed at compile time.")
 #else
-    #define ASSERT_CT(expr) switch(0) { case 0: case expr:; }
+    /* #define ASSERT_CT(expr) switch(0) { case 0: case expr:; } */
+
+/* GCC seems to havs a bug, that it does not accept _Pragma statements
+ * in multiline macros.
+ */
+#ifdef __GNUC__
+#define ASSERT_CT(expr)                                 \
+  typedef char static_assertion##__LINE__[(expr)?1:-1]; \
+  static_assertion##__LINE__ dummy;                     \
+  (void) dummy
+#else
+#define ASSERT_CT(expr)                                 \
+  COMPILER_DISABLE_WARNING_UNUSED_LOCAL_TYPEDEF         \
+  typedef char static_assertion##__LINE__[(expr)?1:-1]  \
+  COMPILER_ENABLE_WARNING_UNUSED_LOCAL_TYPEDEF
+#endif
+
 #endif /* #ifdef PL_PRIVATE_C11_STATIC_ASSERT_AVAILABLE */
 
 
