@@ -7,7 +7,8 @@
 #if defined(PLATFORM_LINUX)
 
 #ifndef _DEFAULT_SOURCE
-  #define _DEFAULT_SOURCE
+  #error _DEFAULT_SOURCE is required to be defined. Compile with -D_DEFAULT_SOURCE.
+/* #define _DEFAULT_SOURCE */
 #endif
 
 #elif defined(PLATFORM_WINDOWS)
