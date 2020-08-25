@@ -42,6 +42,10 @@
 #define COMPILER_ENABLE_WARNING_CAST_QUALIFIER                              COMPILER_ENABLE_WARNING (cast-qual, cast-qual, -1)
 
 /* TODO: Find numeric value for MS compiler. */
+#define COMPILER_DISABLE_WARNING_UNUSED_FUNCTION                            COMPILER_DISABLE_WARNING(unused-function,       unused-function,      -1)
+#define COMPILER_ENABLE_WARNING_UNUSED_FUNCTION                             COMPILER_ENABLE_WARNING (unused-function,       unused-function,      -1)
+
+/* TODO: Find numeric value for MS compiler. */
 #define COMPILER_DISABLE_WARNING_UNUSED_LOCAL_TYPEDEF                       COMPILER_DISABLE_WARNING(unused-local-typedefs, unused-local-typedef, -1)
 #define COMPILER_ENABLE_WARNING_UNUSED_LOCAL_TYPEDEF                        COMPILER_ENABLE_WARNING (unused-local-typedefs, unused-local-typedef, -1)
 

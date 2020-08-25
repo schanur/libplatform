@@ -67,6 +67,20 @@ static void test__compiler__align()
 }
 
 
+/* gets never called. But compiled should not warn about that the
+ * function will never exit. noreturn function attribute is also
+ * tested.
+ */
+COMPILER_DISABLE_WARNING_UNUSED_FUNCTION
+COMPILER_NORETURN(test_compiler__disable_warning__no_return(void));
+
+void test_compiler__disable_warning__no_return(void)
+{
+    while (1);
+}
+COMPILER_ENABLE_WARNING_UNUSED_FUNCTION
+
+
 PLTF_COMPILER_PACKED(
     struct test__compiler__packed__inner_struct {
         char test1;
