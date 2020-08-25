@@ -38,10 +38,13 @@ typedef int socket_t;
 #else
 #ifdef PLATFORM_WINDOWS
 
+#include <winsock2.h>
 #include <windows.h>
-#include <Winsock2.h>
 
+#ifndef __MINGW32__
 typedef int ssize_t; /* Is not defined in unistd.h on windows. */
+#endif
+
 typedef SOCKET      socket_t;
 typedef SOCKADDR_IN sockaddr_in_t;
 
