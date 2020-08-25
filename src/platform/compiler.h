@@ -50,7 +50,7 @@
 #define COMPILER_ENABLE_WARNING_UNUSED_LOCAL_TYPEDEF                        COMPILER_ENABLE_WARNING (unused-local-typedefs, unused-local-typedef, -1)
 
 
-#ifdef PLATFORM_LINUX
+#if defined(PLATFORM_LINUX) || defined(__MINGW32__)
   #define COMPILER_ALIGN(alignment,var)    var             __attribute__ ((aligned (alignment)))
 /*#define COMPILER_PUSH_PACK(bytes)*/
   #define COMPILER_NORETURN(func_sig)      void func_sig   __attribute__ ((noreturn))
