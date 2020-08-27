@@ -88,14 +88,13 @@ PLTF_COMPILER_PACKED(
     }
     );
 
-PLTF_COMPILER_PACKED(
-    struct test__compiler__packed__outer_struct {
-        struct test__compiler__packed__inner_struct inner1;
-        struct test__compiler__packed__inner_struct inner2;
-        struct test__compiler__packed__inner_struct inner3;
-        struct test__compiler__packed__inner_struct inner4;
-    }
-    );
+struct test__compiler__packed__outer_struct {
+    struct test__compiler__packed__inner_struct inner1;
+    struct test__compiler__packed__inner_struct inner2;
+    struct test__compiler__packed__inner_struct inner3;
+    struct test__compiler__packed__inner_struct inner4;
+};
+
 
 static void test__compiler__packed()
 {
@@ -103,10 +102,67 @@ static void test__compiler__packed()
 }
 
 
+static void test__compiler__disable_warning__double_promotion()
+{
+    COMPILER_DISABLE_WARNING_DOUBLE_PROMOTION
+    float  a = 1.1f;
+    double b = 1.1;
+    double c = a * b;
+    (void) c;
+    COMPILER_ENABLE_WARNING_DOUBLE_PROMOTION
+}
+
+
+static void test__compiler__disable_warning__cast_qualifier()
+{
+    /* COMPILER_DISABLE_WARNING_CAST_QUALIFIER */
+    /* char        buffer[1]; */
+    /* const char* ptr = buffer; */
+    /* char*       casted_value = COMPILER_REINTERPRET_CAST(char *, ptr); */
+    /* (void) casted_value; */
+    /* COMPILER_ENABLE_WARNING_CAST_QUALIFIER */
+}
+
+
+static void test__compiler__disable_warning__unused_local_typedef()
+{
+    COMPILER_DISABLE_WARNING_UNUSED_LOCAL_TYPEDEF
+    typedef char unused_typedef;
+    COMPILER_ENABLE_WARNING_UNUSED_LOCAL_TYPEDEF
+}
+
+
+static void test__compiler__reinterpret_cast()
+{
+    int   a = 1;
+    float b;
+
+    b = COMPILER_STATIC_CAST(float, a);
+    (void) b;
+}
+
+
+static void test__compiler__static_cast()
+{
+    int   *a    = NULL;
+    float *b;
+
+    b = COMPILER_REINTERPRET_CAST(float *, a);
+    (void) b;
+}
+
+
 int main(void)
 {
     test__compiler__align();
     test__compiler__packed();
+
+    test__compiler__disable_warning__double_promotion();
+    test__compiler__disable_warning__cast_qualifier();
+    test__compiler__disable_warning__unused_local_typedef();
+
+    test__compiler__reinterpret_cast();
+    test__compiler__static_cast();
 
     return mu_test_status;
 }
