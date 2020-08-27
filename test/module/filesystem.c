@@ -31,4 +31,6 @@ int main(void)
 #ifdef _POSIX_SOURCE
     test__filesystem__PLTF_ABS_EXECUTABLE_FILENAME();
 #endif
+
+    return 0;
 }
