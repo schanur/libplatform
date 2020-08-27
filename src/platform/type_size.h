@@ -30,7 +30,7 @@
 #else
   #ifdef PLATFORM_WINDOWS
     #ifndef NO_C_STD_COMPLIANT_STDINT_HEADER
-      //#error NO_C_STD_COMPLIANT_STDINT_HEADER not set.
+      /* #error NO_C_STD_COMPLIANT_STDINT_HEADER not set. */
     #endif
 
     #if UINT_MAX == 0xffffffffUL
@@ -51,7 +51,7 @@
       #else
         /* FIXME */
         #define SIZE_T_SIZE 4
-        //#error Unknown integer width.
+        /* #error Unknown integer width. */
       #endif
     #endif
   #else

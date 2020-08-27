@@ -60,7 +60,7 @@
       /* The Windows version does not support conditional variables.
        * We simulate this feature by using
        */
-      //#define
+      /* #define */
     #endif
   #else
     #error No platform defined.

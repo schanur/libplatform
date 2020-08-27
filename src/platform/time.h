@@ -50,7 +50,7 @@
       #define SLEEP_USEC_CHECK(err,remaining,microseconds) PLTF_PRIVATE_SLEEP_NSEC_CHECK(err, remaining, microseconds, 1000)
       #define SLEEP_USEC(microseconds)                                      \
         do {                                                                \
-            /*ASSERT_RT(microseconds < ) // TODO: Check for no overflow during multiplication */ \
+            /*ASSERT_RT(microseconds < ) */ /* TODO: Check for no overflow during multiplication */ \
             SLEEP_NSEC(microseconds * 1000)                                 \
         } while (0);
 
@@ -68,7 +68,7 @@
 #else
   #ifdef PLATFORM_WINDOWS
 
-  //#if 0
+  /* #if 0 */
   #include <windows.h> /* Sleep() */
 
   #define SLEEP_MSEC(milliseconds)       ASSERT_RT(milliseconds >= 0); Sleep(milliseconds);
@@ -86,7 +86,7 @@
   /*     int64_t tv_sec; */
   /*     long    tv_nsec; */
   /* }; */
-  //#endif
+  /* #endif */
 
 
   #else

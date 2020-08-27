@@ -82,7 +82,7 @@ typedef DWORD /*WINAPI*/       thread_sig_start_t;
 /*                 0,                                                      \ */
 /*                 NULL))) == 1L) */
 
-//#define THREAD_CREATE(ERR, HDL, FUNC, ARGS) (err = ((unsigned long) (HDL = (thread_handle_t) _beginthreadex(NULL, 0, &FUNC, (void*) ARGS, 0, NULL))) == 1L)
+/* #define THREAD_CREATE(ERR, HDL, FUNC, ARGS) (err = ((unsigned long) (HDL = (thread_handle_t) _beginthreadex(NULL, 0, &FUNC, (void*) ARGS, 0, NULL))) == 1L) */
 #define THREAD_END                          _endthreadex()
 #define THREAD_JOIN(err,hdl,ret)            (WaitForSingleObject(hdl, INFINITE))
 #define THREAD_RET(return_code)             return (return_code)

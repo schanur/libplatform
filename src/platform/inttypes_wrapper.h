@@ -15,11 +15,11 @@
 #else
   #ifdef PLATFORM_WINDOWS
     #if 1 == 1
-    //#ifdef NO_C_STD_COMPLIANT_STDINT_HEADER
+    /* #ifdef NO_C_STD_COMPLIANT_STDINT_HEADER */
       /* The location of the stdint.h file has to be added to
        * "Additional include path" variable in visual studio.
        */
-      #include "stdint.h" // cppcheck-suppress missingInclude
+      #include "stdint.h" /* cppcheck-suppress missingInclude */
 
       #define SIZE_T size_t
 
