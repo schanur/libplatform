@@ -4,6 +4,7 @@
 #include "platform/include_first.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #define mu_assert(condition)                                            \
     do {                                                                \
@@ -16,6 +17,7 @@
                     "  Function:  %s\n"                                 \
                     "  Line:      %i\n",                                \
                     #condition, __FILE__, __func__, __LINE__);          \
+            exit(1);                                                    \
         }                                                               \
     } while (0)
 
