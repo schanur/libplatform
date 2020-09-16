@@ -16,8 +16,19 @@
 
 
 #if PLTF_LANG == PLTF_C
+  #define NULL_PTR NULL
+
   #define PLTF_LANG_TYPE_CAST(type, value) (type)(value)
 #else
+/* C++ supports nullptr since C++11. Our fallback for older C++
+ * versions is NULL.
+ */
+  #if !defined(nullptr)
+    #define NULL_PTR NULL
+  #else
+    #define NULL_PTR nullptr
+  #endif
+
   #define PLTF_LANG_TYPE_CAST(type, value) static_cast<char>(value)
 #endif
 

@@ -9,6 +9,14 @@ static void test__at_least_one_language_defined()
     mu_assert(PLTF_LANG != 0);
 }
 
+
+static void test__NULL_PTR()
+{
+    char *a = NULL_PTR;
+    (void) a;
+}
+
+
 static void test__cast_type_to_char()
 {
     char a;
@@ -22,6 +30,7 @@ static void test__cast_type_to_char()
 int main(void)
 {
     test__at_least_one_language_defined();
+    test__NULL_PTR();
     test__cast_type_to_char();
 
     return mu_test_status;

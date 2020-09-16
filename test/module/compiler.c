@@ -6,6 +6,8 @@
 #include "platform/compiler.h"
 
 #include "platform/inttypes_wrapper.h"
+#include "platform/lang.h"
+
 
 static void test__compiler__align()
 {
@@ -144,7 +146,7 @@ static void test__compiler__reinterpret_cast()
 
 static void test__compiler__static_cast()
 {
-    int   *a    = NULL;
+    int   *a = NULL_PTR;
     float *b;
 
     b = COMPILER_REINTERPRET_CAST(float *, a);
