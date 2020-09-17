@@ -94,17 +94,13 @@ VALGRIND_GLOBAL_OPTION="-q --error-exitcode=9 --trace-children=yes --num-callers
 function fill_tail
 {
     local LENGTH="${1}"
-    local FILL_CHARACTER="${2}"
-    shift; shift
+    shift
     local STRING="${@}"
-    local FILL_CHARACTER_COUNT
+    # local FILL_CHARACTER_COUNT
+    local PAD="                                  "
 
-    (( FILL_CHARACTER_COUNT=${LENGTH}-${#STRING} ))
-    for I in $(seq 1 ${FILL_CHARACTER_COUNT}); do
-        STRING="${STRING}${FILL_CHARACTER}"
-    done
-
-    echo -n "${STRING}"
+    STRING="${STRING}${PAD}"
+    echo -n "${STRING:0:${LENGTH}}"
 }
 
 
@@ -125,7 +121,7 @@ function pp_test_number
 {
     local TEST_NO="${1}"
 
-    echo -n "[$(fill_tail 6 ' ' "${TEST_NO}")]"
+    echo -n "[$(fill_tail 6 "${TEST_NO}")]"
 }
 
 
@@ -133,7 +129,7 @@ function pp_execution_type
 {
     local EXECUTION_TYPE="${1}"
 
-    echo -n "[$(fill_tail 13 ' ' "${EXECUTION_TYPE}")]"
+    echo -n "[$(fill_tail 13 "${EXECUTION_TYPE}")]"
 }
 
 
@@ -141,7 +137,7 @@ function pp_language
 {
     local LANGUAGE="${1}"
 
-    echo -n "[$(fill_tail 3 ' ' "${LANGUAGE}")]"
+    echo -n "[$(fill_tail 3 "${LANGUAGE}")]"
 }
 
 
@@ -149,7 +145,7 @@ function pp_compiler
 {
     local COMPILER="${1}"
 
-    echo -n "[$(fill_tail 12 ' ' "${COMPILER}")]"
+    echo -n "[$(fill_tail 31 "${COMPILER}")]"
 }
 
 
@@ -157,7 +153,7 @@ function pp_language_standard
 {
     local STD="${1}"
 
-    echo -n "[$(fill_tail 7 ' ' "${STD}")]"
+    echo -n "[$(fill_tail 7 "${STD}")]"
 }
 
 
@@ -165,7 +161,7 @@ function pp_module
 {
     local MODULE="${1}"
 
-    echo -n "[$(fill_tail 25 ' ' "${MODULE}")]"
+    echo -n "[$(fill_tail 25 "${MODULE}")]"
 }
 
 
@@ -173,7 +169,7 @@ function pp_build
 {
     local BUILD="${1}"
 
-    echo -n "[$(fill_tail 7 ' ' "${BUILD}")]"
+    echo -n "[$(fill_tail 7 "${BUILD}")]"
 }
 
 
