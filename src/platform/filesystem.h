@@ -15,9 +15,22 @@
   #include <stdlib.h>       /* realpath() */
   #include <unistd.h>       /* readlink() */
 
+  #include <errno.h>        /* ENOENT */
+
   #define PLTF_PATH_MAX PATH_MAX
 
-  #define PLTF_MKDIR(err,pathname)                                         (err = (mkdir(pathname, 0711) != -1))
+
+  #define PLTF_MKDIR(err,pathname)                                         (err = (mkdir(pathname, 0711) != 0))
+  #define PLTF_RMDIR(err,pathname)                                         (err = (rmdir(pathname)       != 0))
+  #define PLTF_DIR_EXIST(err,pathname,dir_exists)                \
+  do {                                                           \
+      int stat_err;                                              \
+      struct stat statbuf;                                       \
+                                                                 \
+      err = 0;                                                   \
+      stat_err   = stat(pathname, &statbuf) == -1;               \
+      dir_exists = (!stat_err && S_ISDIR(statbuf.st_mode));      \
+  } while (0)
 
   #ifdef _POSIX_SOURCE
     #define PLTF_ABS_EXECUTABLE_FILENAME(err,filename,filename_buf_size)   (err = (readlink("/proc/self/exe", filename, filename_buf_size) == -1))
@@ -31,17 +44,27 @@
 
 
 /* #elif PLATFORM_FREEBSD */
+#elif defined(PLATFORM_WINDOWS)
+
+  #include <dir.h>     /* mkdir() */
+  #include <windows.h> /* RemoveDirectoryA() */
+  #include <windef.h>  /* bool datatype */
+
+  #define PLTF_PATH_MAX PATH_MAX
+
+  #define PLTF_MKDIR(err,pathname)                                         (err = (mkdir(pathname)            == -1))
+  #define PLTF_RMDIR(err,pathname)                                         (err = (RemoveDirectoryA(pathname) ==  0))
+  #define PLTF_DIR_EXIST(err,pathname,dir_exists)                       \
+    do {                                                                \
+        DWORD attrib = GetFileAttributes(pathname);                     \
+        err          = 0;                                               \
+        dir_exists   = (attrib != INVALID_FILE_ATTRIBUTES) && (attrib & FILE_ATTRIBUTE_DIRECTORY); \
+    } while (0)
+
 #else
-  #ifdef PLATFORM_WINDOWS
-
-    #include <dir.h>
-
-    #define PLTF_MKDIR(err,pathname) (err = (mkdir(pathname) != -1))
-
-  #else
-    #error No platform defined.
-  #endif
+  #error No platform defined.
 #endif
+
 
 
 #endif /* PLATFORM_FILESYSTEM_H */
