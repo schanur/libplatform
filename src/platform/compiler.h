@@ -58,7 +58,7 @@
   #define PLTF_COMPILER_PACKED(structure)  structure       __attribute__ ((packed))
   #define COMPILER_WEAK_SYMBOL(symbol)     symbol          __attribute__ ((weak))
 
-  #define COMPILER_PUSH_WARNING()
+  /* #define COMPILER_PUSH_WARNING() */
 #else
   #ifdef PLATFORM_WINDOWS
     #define COMPILER_ALIGN(alignment, var) __declspec(align(alignment)) var
@@ -89,7 +89,6 @@
   #define COMPILER_REINTERPRET_CAST(type,value) ((type) value)
   #define COMPILER_STATIC_CAST(type,value)      ((type) value)
 #endif
-
 
 
 #endif /* PLATFORM_COMPILER_H */
