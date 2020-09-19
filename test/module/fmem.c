@@ -2,9 +2,12 @@
 
 #include "../shared_c/test.h"
 
-#include "platform/fmem.h"
 
 #include <string.h> /* strcmp() */
+
+#ifndef PLATFORM_WINDOWS
+
+#include "platform/fmem.h"
 
 static void test__fmem__open_close()
 {
@@ -39,12 +42,13 @@ static void test__fmem__write_and_flush__compare_memory()
     PLTF_FMEM_CLOSE(err, hdl);
     mu_assert(!err);
 }
-
+#endif
 
 int main(void)
 {
+#ifndef PLATFORM_WINDOWS
     test__fmem__open_close();
     test__fmem__write_and_flush__compare_memory();
-
+#endif
     return 0;
 }

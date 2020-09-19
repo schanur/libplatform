@@ -11,6 +11,7 @@
 #include "dynlib.h"
 #include "filesystem.h"
 #include "floating_point.h"
+#include "fmem.h"
 #include "interprocess_mutex.h"
 #include "inttypes_wrapper.h"
 #include "lang.h"

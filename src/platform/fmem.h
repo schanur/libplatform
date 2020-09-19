@@ -15,7 +15,10 @@ typedef FILE* PLTF_FMEM_HDL;
 
 #define PLTF_FMEM_WRITE(err,hdl,buf,buf_size) (err = (fwrite(buf, buf_size, 1, hdl)) != 1)
 #define PLTF_FMEM_FLUSH(err,hdl)              (err = (fflush(hdl)) != 0)
+
 #elif defined(PLATFORM_WINDOWS)
+
+#error FMEM Macros are currently not implemented for Windows.
 
 #else
 #error No platform defined.
