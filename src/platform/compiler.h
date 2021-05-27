@@ -4,6 +4,22 @@
 #include "os_detect.h"
 
 
+#define PLTF_COMPILER_GCC     10
+#define PLTF_COMPILER_MINGW32 12
+#define PLTF_COMPILER_CLANG   20
+#define PLTF_COMPILER_MSC     30
+
+#if defined(__clang__)
+#define PLTF_COMPILER PLTF_COMPILER_CLANG
+#elif defined(_MSC_VER)
+#define PLTF_COMPILER PLTF_COMPILER_MSC
+#elif defined(__GNUC__)
+#define PLTF_COMPILER PLTF_COMPILER_GCC
+#else
+#error Unknown Compiler
+#endif
+
+
 #define PLATFORM_PRIVATE_STR_INTERN(s)                                      #s
 #define PLATFORM_PRIVATE_STR(x,y)                                           PLATFORM_PRIVATE_STR_INTERN(x ## y)
 
