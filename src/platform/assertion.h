@@ -20,17 +20,19 @@
  * is just crashing instead of getting terminated by std default
  * assert macro.
  */
-/* #define ASSERT_RT__CRASH_ON_ASSERTION_FAIL */
+#define ASSERT_RT__CRASH_ON_ASSERTION_FAIL
 
 /* Crash method by which the application is halted. */
 /* #define ASSERT_RT__CRASH_METHOD_DIV_BY_ZERO */
-#define ASSERT_RT__CRASH_METHOD_ABORT
+#ifndef ASSERT_RT__CRASH_COMMAND
+  #define ASSERT_RT__CRASH_METHOD_ABORT
 
-#ifdef ASSERT_RT__CRASH_METHOD_DIV_BY_ZERO
-  #define ASSERT_RT__CRASH_COMMAND(expr) ((void) 1 / 0)
-#endif
-#ifdef ASSERT_RT__CRASH_METHOD_ABORT
-  #define ASSERT_RT__CRASH_COMMAND(expr) abort(); assert(expr) /* assert is a backup just in case abort does not work as expected. */
+  #ifdef ASSERT_RT__CRASH_METHOD_DIV_BY_ZERO
+    #define ASSERT_RT__CRASH_COMMAND(expr) ((void) 1 / 0)
+  #endif
+  #ifdef ASSERT_RT__CRASH_METHOD_ABORT
+    #define ASSERT_RT__CRASH_COMMAND(expr) abort(); assert(expr) /* assert is a backup just in case abort does not work as expected. */
+  #endif
 #endif
 
 /* #define ASSERT_RT__CRASH_COMMAND(expr) fprintf(stderr, #expr); (void) (1 / 0); abort(); assert(expr) */
