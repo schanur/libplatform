@@ -66,7 +66,7 @@ VALGRIND_OPTIONS="-q --suppressions=valgrind_suppress --error-exitcode=1"
 for BINARY in ${PROGRAMS}; do
     echo "module: ${BINARY}"
     for TARGET in ${TARGETS}; do
-        echo "  build traget: ${TARGET}"
+        echo "  build target: ${TARGET}"
         I=0
         while [ "${CHECKS[${I}]}" != "" ]; do
             # Build the Valgrind command we want to execute for

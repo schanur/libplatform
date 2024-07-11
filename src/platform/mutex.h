@@ -75,7 +75,7 @@
 #else
   #ifdef PLATFORM_WINDOWS
 
-    /* TODO: Use lightwight mutex (critical section in windows terms)
+    /* TODO: Use lightweight mutex (critical section in windows terms)
      * instead of heavy interprocess locks.
      */
     #define MUTEX__CRITICAL_SECTION_SUPPORTED

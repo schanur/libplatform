@@ -8,7 +8,7 @@ HEADER_PATH="src/platform"
 
 function file_included() {
     local HEADER_TO_GREP=${1}
-    local HEADER_TO_SERACH=${2}
+    local HEADER_TO_SEARCH=${2}
     local OCCUR_CNT
 
     # grep -c $(basename ${HEADER_TO_SEARCH}) < ${HEADER_TO_GREP}

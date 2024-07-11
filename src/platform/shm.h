@@ -24,7 +24,7 @@ typedef int shm_t;
 
 /*#define SHM_CREATE
 #define SHM_ATTACH
-#define SHM_DEATTACH
+#define SHM_DETACH
 #define SHM_DESTROY*/
 
 #else

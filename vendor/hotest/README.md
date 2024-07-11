@@ -1,4 +1,4 @@
 # hotest
 
-## [h]eader [o]nly [test] library
+## [h]eader [o]only [test] library
 
