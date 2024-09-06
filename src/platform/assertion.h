@@ -46,7 +46,7 @@
   #ifndef NDEBUG
     #ifdef ASSERT_RT__CRASH_ON_ASSERTION_FAIL
       /* #include <cstdlib> */
-      #define ASSERT_RT(expr) if (!(expr)) { ASSERT_RT__CRASH_COMMAND(expr); } /* LCOV_EXCL_LINE LCOV_EXCL__BR_LINE */
+      #define ASSERT_RT(expr) if (!(expr)) { ASSERT_RT__CRASH_COMMAND(expr); } do {} while(0) /* LCOV_EXCL_LINE LCOV_EXCL__BR_LINE */
     #else
       #define ASSERT_RT(expr) assert(expr) /* LCOV_EXCL_LINE LCOV_EXCL_BR_LINE */
     #endif /* #ifdef ASSERT_RT__CRASH_ON_ASSERTION_FAIL */
