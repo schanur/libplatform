@@ -57,7 +57,7 @@
 #define MUTEX_LOCK(mutex)                                               \
     if (!pthread_mutex_lock(&((mutex)->lock))) {                        \
         (mutex)->lock_position.line     = __LINE__;                     \
-        (mutex)->lock_position.functoin = __func__;                     \
+        (mutex)->lock_position.function = __func__;                     \
     } else {                                                            \
         PLATFORM__MUTEX__DBG_MSG_FUNC((mutex)->lock_position.line);     \
         exit(1);                                                        \
