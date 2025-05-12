@@ -65,6 +65,10 @@
 #define COMPILER_DISABLE_WARNING_UNUSED_LOCAL_TYPEDEF                       COMPILER_DISABLE_WARNING(unused-local-typedefs, unused-local-typedef, -1)
 #define COMPILER_ENABLE_WARNING_UNUSED_LOCAL_TYPEDEF                        COMPILER_ENABLE_WARNING (unused-local-typedefs, unused-local-typedef, -1)
 
+/* TODO: Find numeric value for MS compiler. */
+#define COMPILER_DISABLE_WARNING_FORMAT_STR_IS_NOT_STR_LITERAL              COMPILER_DISABLE_WARNING(format-nonliteral, format-nonliteral, -1)
+#define COMPILER_ENABLE_WARNING_FORMAT_STR_IS_NOT_STR_LITERAL               COMPILER_ENABLE_WARNING (format-nonliteral, format-nonliteral, -1)
+
 
 #if defined(PLATFORM_LINUX) || defined(__MINGW32__)
   #define COMPILER_ALIGN(alignment,var)    var             __attribute__ ((aligned (alignment)))
